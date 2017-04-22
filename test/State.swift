@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum State {
+enum State: String {
     case New, InProgress, Done
 }

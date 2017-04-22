@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Task {
+class Task1 {
     
     //MARK: Properties
     

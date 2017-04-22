@@ -21,6 +21,7 @@
 		848431F81EAA203A00501150 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F71EAA203A00501150 /* State.swift */; };
 		848431FA1EAA28A800501150 /* CreateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F91EAA28A800501150 /* CreateTaskViewController.swift */; };
 		848431FC1EAA28BA00501150 /* ChangeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */; };
+		848C065B1EABB42D005E9A6D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C065A1EABB42D005E9A6D /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		848431F71EAA203A00501150 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		848431F91EAA28A800501150 /* CreateTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskViewController.swift; sourceTree = "<group>"; };
 		848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTaskViewController.swift; sourceTree = "<group>"; };
+		848C065A1EABB42D005E9A6D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				848431C01EA9E70500501150 /* AppDelegate.swift */,
+				848C065A1EABB42D005E9A6D /* Extensions.swift */,
 				848431F91EAA28A800501150 /* CreateTaskViewController.swift */,
 				848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */,
 				848431F71EAA203A00501150 /* State.swift */,
@@ -285,6 +288,7 @@
 				848431C31EA9E70500501150 /* ShowTaskViewController.swift in Sources */,
 				848431C11EA9E70500501150 /* AppDelegate.swift in Sources */,
 				848431F61EAA1F9D00501150 /* Task.swift in Sources */,
+				848C065B1EABB42D005E9A6D /* Extensions.swift in Sources */,
 				848431F81EAA203A00501150 /* State.swift in Sources */,
 				848431FC1EAA28BA00501150 /* ChangeTaskViewController.swift in Sources */,
 				848431C91EA9E70500501150 /* test.xcdatamodeld in Sources */,
@@ -535,6 +539,7 @@
 				848431EA1EA9E70500501150 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		848431EB1EA9E70500501150 /* Build configuration list for PBXNativeTarget "testTests" */ = {
 			isa = XCConfigurationList;
@@ -543,6 +548,7 @@
 				848431ED1EA9E70500501150 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		848431EE1EA9E70500501150 /* Build configuration list for PBXNativeTarget "testUITests" */ = {
 			isa = XCConfigurationList;
@@ -551,6 +557,7 @@
 				848431F01EA9E70500501150 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
