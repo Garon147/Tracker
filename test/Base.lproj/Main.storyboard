@@ -244,14 +244,14 @@
                                 <rect key="frame" x="116" y="74" width="143" height="30"/>
                                 <state key="normal" title="Create new task"/>
                                 <connections>
-                                    <action selector="createTaskButton:" destination="eru-mb-vJx" eventType="touchUpInside" id="8TO-eH-K2p"/>
+                                    <action selector="newTaskButton:" destination="eru-mb-vJx" eventType="touchUpInside" id="Icl-XZ-wDD"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NDL-N4-YX1">
                                 <rect key="frame" x="16" y="114" width="343" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="xub-Ly-DeQ" customClass="TaskTableViewCell" customModule="test" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="90" id="xub-Ly-DeQ" customClass="TaskTableViewCell" customModule="test" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xub-Ly-DeQ" id="trF-NT-HJy">

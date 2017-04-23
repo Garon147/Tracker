@@ -106,6 +106,7 @@ class CreateTaskViewController: UIViewController {
         
         do {
             try managedContext.save()
+            print("save succeeded")
         } catch let error as NSError {
             print("could not save, \(error), \(error.userInfo)")
         }
