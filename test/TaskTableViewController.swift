@@ -82,10 +82,15 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
         cell.nameLabel.text = task.value(forKey: "name") as? String
         cell.descriptionLabel.text = task.value(forKey: "taskDescription") as? String
         
-        let startDateString = task.value(forKey: "startDate") as? String
-        let endDateString = task.value(forKey: "endDate") as? String
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
         
-//        cell.datesLabel.text = startDateString! + " - " + endDateString!
+        
+        let startDateString = dateFormatter.string(from: task.value(forKey: "startDate") as! Date)
+        let endDateString = dateFormatter.string(from: task.value(forKey: "endDate") as! Date)
+        
+        cell.datesLabel.text = startDateString + " - " + endDateString
         
         return cell
     }
