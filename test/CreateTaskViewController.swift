@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CreateTaskViewController: UIViewController {
+class CreateTaskViewController: BaseViewController {
     
 
     //MARK: Properties
@@ -33,6 +33,8 @@ class CreateTaskViewController: UIViewController {
         let alertTitle = "Error"
         let alertMessage = "All field except description must be filled!"
         
+        tableMustBeUpdated = false
+        
         if((nameTextField.text?.isEmpty)! || (timeTextField.text?.isEmpty)! || (startDateTextField.text?.isEmpty)! || (endDateTextField.text?.isEmpty)!){
             
             let alert = UIAlertController(title: alertTitle, message: alertMessage,
@@ -46,6 +48,8 @@ class CreateTaskViewController: UIViewController {
         } else {
         
             saveTask(name: nameTextField.text!, percentCompletition: 0, state: .New, estimatedTime: Double(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionTextField.text)
+            tableMustBeUpdated = true
+//            taskTable.reloadData()
         }
     }
     
@@ -106,7 +110,8 @@ class CreateTaskViewController: UIViewController {
         
         do {
             try managedContext.save()
-            print("save succeeded")
+            tasks.append(task)
+            print("save succeeded, \(tasks.count)")
         } catch let error as NSError {
             print("could not save, \(error), \(error.userInfo)")
         }

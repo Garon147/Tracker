@@ -22,6 +22,7 @@
 		848431FA1EAA28A800501150 /* CreateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F91EAA28A800501150 /* CreateTaskViewController.swift */; };
 		848431FC1EAA28BA00501150 /* ChangeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */; };
 		848C065B1EABB42D005E9A6D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C065A1EABB42D005E9A6D /* Extensions.swift */; };
+		849875BB1EADF1A1000AFF67 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849875BA1EADF1A1000AFF67 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		848431F91EAA28A800501150 /* CreateTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskViewController.swift; sourceTree = "<group>"; };
 		848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTaskViewController.swift; sourceTree = "<group>"; };
 		848C065A1EABB42D005E9A6D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		849875BA1EADF1A1000AFF67 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				848431C01EA9E70500501150 /* AppDelegate.swift */,
+				849875BA1EADF1A1000AFF67 /* BaseViewController.swift */,
 				848C065A1EABB42D005E9A6D /* Extensions.swift */,
 				848431F91EAA28A800501150 /* CreateTaskViewController.swift */,
 				848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */,
@@ -285,6 +288,7 @@
 			files = (
 				848431F41EAA1CFA00501150 /* TaskTableViewController.swift in Sources */,
 				848431F21EAA076100501150 /* TaskTableViewCell.swift in Sources */,
+				849875BB1EADF1A1000AFF67 /* BaseViewController.swift in Sources */,
 				848431C31EA9E70500501150 /* ShowTaskViewController.swift in Sources */,
 				848431C11EA9E70500501150 /* AppDelegate.swift in Sources */,
 				848431F61EAA1F9D00501150 /* Task.swift in Sources */,

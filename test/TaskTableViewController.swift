@@ -7,15 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
-class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TaskViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: Properties
     
     @IBOutlet weak var taskTable: UITableView!
     
-    
-    var tasks = [Task]();
     
     
     //MARK: Actions
@@ -23,23 +22,47 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func newTaskButton(_ sender: UIButton) {
         
         performSegue(withIdentifier: "CreateTask", sender: self)
+//        if(tableMustBeUpdated){
+//            taskTable.reloadData()
+//            
+//        }
     }
     
-
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         taskTable.dataSource = self
         taskTable.delegate = self
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Task")
+        
+        do {
+            tasks = try managedContext.fetch(fetchRequest)
+            print("fetch succeeded")
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +72,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // MARK: - Table view data source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tasks.count
     }
     
    
@@ -59,7 +82,13 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = taskTable.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskTableViewCell
         
         
-        cell.nameLabel.text = "NAME_TEXT"
+        cell.nameLabel.text = task.value(forKey: "name") as? String
+        cell.descriptionLabel.text = task.value(forKey: "taskDescription") as? String
+        
+        let startDateString = task.value(forKey: "startDate") as? String
+        let endDateString = task.value(forKey: "endDate") as? String
+        
+//        cell.datesLabel.text = startDateString! + " - " + endDateString!
         
         return cell
     }
