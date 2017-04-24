@@ -33,8 +33,6 @@ class CreateTaskViewController: BaseViewController {
         let alertTitle = "Error"
         let alertMessage = "All field except description must be filled!"
         
-        tableMustBeUpdated = false
-        
         if((nameTextField.text?.isEmpty)! || (timeTextField.text?.isEmpty)! || (startDateTextField.text?.isEmpty)! || (endDateTextField.text?.isEmpty)!){
             
             let alert = UIAlertController(title: alertTitle, message: alertMessage,
@@ -48,8 +46,6 @@ class CreateTaskViewController: BaseViewController {
         } else {
         
             saveTask(name: nameTextField.text!, percentCompletition: 0, state: .New, estimatedTime: Double(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionTextField.text)
-            tableMustBeUpdated = true
-//            taskTable.reloadData()
         }
     }
     

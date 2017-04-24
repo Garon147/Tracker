@@ -22,10 +22,6 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
     @IBAction func newTaskButton(_ sender: UIButton) {
         
         performSegue(withIdentifier: "CreateTask", sender: self)
-//        if(tableMustBeUpdated){
-//            taskTable.reloadData()
-//            
-//        }
     }
     
     override func viewDidLoad() {
@@ -57,6 +53,7 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
         
         do {
             tasks = try managedContext.fetch(fetchRequest)
+            taskTable.reloadData()
             print("fetch succeeded")
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -96,6 +93,7 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
+
 
     
 

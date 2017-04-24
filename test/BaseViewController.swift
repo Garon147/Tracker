@@ -12,7 +12,6 @@ import CoreData
 class BaseViewController: UIViewController {
     
     var tasks = [NSManagedObject]();
-    var tableMustBeUpdated = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
