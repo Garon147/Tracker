@@ -30,6 +30,8 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
         taskTable.dataSource = self
         taskTable.delegate = self
         
+        taskTable.tableFooterView = UIView()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
