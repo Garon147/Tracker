@@ -31,7 +31,7 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func saveTask(name: String, percentCompletition: Int16, state: State, estimatedTime: Double, startDate: Date,
+    func saveTask(name: String, percentCompletition: Int16, state: State, estimatedTime: Int32, startDate: Date,
                   dueDate: Date, description: String?) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -76,8 +76,30 @@ class BaseViewController: UIViewController {
         
     }
     
-    func fetchData() {
+    func fetchData(taskTable: UITableView?) {
         
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Task")
+        
+        do {
+            tasks = try managedContext.fetch(fetchRequest)
+            if(taskTable != nil){
+                taskTable?.reloadData()
+            }
+            
+            print("fetch succeeded")
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+
     }
     
 

@@ -45,7 +45,7 @@ class CreateTaskViewController: BaseViewController {
             
         } else {
         
-            saveTask(name: nameTextField.text!, percentCompletition: 0, state: .New, estimatedTime: Double(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionTextField.text)
+            saveTask(name: nameTextField.text!, percentCompletition: 0, state: .New, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionTextField.text)
             navigationController?.popViewController(animated: true)
         }
     }

@@ -13,7 +13,7 @@ class ShowTaskViewController: BaseViewController {
     
     
     var indexPath: IndexPath? = nil
-//    var task: NSManagedObject? = nil
+    var textFields = [UITextField]()
     
     //MARK: Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -32,30 +32,57 @@ class ShowTaskViewController: BaseViewController {
     //MARK: Actions
     @IBAction func applyChangesButton(_ sender: UIButton) {
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        
+        saveTask(name: nameTextField.text!, percentCompletition: 5, state: .InProgress, estimatedTime: 10, startDate: dateFormatter.date(from: startDateTextField.text!)!, dueDate: dateFormatter.date(from: endDateTextField.text!)!, description: taskDescriptionText.text)
+        
         switchButton.isOn = false
+        
+        navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func editSwitchButton(_ sender: Any) {
+    @IBAction func editSwitchButton(_ sender: UISwitch) {
+        
+        if (sender.isOn) {
+            
+            for item in textFields {
+                item.isEnabled = true
+            }
+            
+            taskDescriptionText.isEditable = true
+            applyChangesBtn.isEnabled = true
+        } else {
+            
+            for item in textFields {
+                item.isEnabled = false
+            }
+            
+            taskDescriptionText.isEditable = false
+            applyChangesBtn.isEnabled = false
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var textFields = [UITextField]()
+        
         textFields.append(nameTextField)
         textFields.append(progressTextField)
         textFields.append(statusTextField)
         textFields.append(timeTextField)
         textFields.append(startDateTextField)
         textFields.append(endDateTextField)
+        
         textFieldsStyles(textFieldArray: textFields, taskDescription: taskDescriptionText)
+        setEdits(textFields: textFields, textDescription: taskDescriptionText)
         
-        fetchData()
+        fetchData(taskTable: nil)
         let task = tasks[(indexPath?.row)!]
+        setText(task: task as! Task)
         
-        print("\(tasks.count)")
         
-        nameTextField.text = task.value(forKey: "name") as? String
         
         
         
@@ -74,28 +101,68 @@ class ShowTaskViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func fetchData() {
+    func setText(task: Task) {
         
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
+        let progress = task.value(forKey: "percentCompletition")
+        
+        progressView.setProgress(progress as! Float, animated: true)
+        
+        nameTextField.text = task.value(forKey: "name") as? String
+        progressTextField.text = String(describing: progress!) + " %"
+        statusTextField.text = task.value(forKey: "state") as? String
+        timeTextField.text = String(describing: task.value(forKey: "estimatedTime")!) + " hours"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        
+        startDateTextField.text = dateFormatter.string(from: task.value(forKey: "startDate") as! Date)
+        endDateTextField.text = dateFormatter.string(from: task.value(forKey: "endDate") as! Date)
+        taskDescriptionText.text = task.value(forKey: "taskDescription") as? String
+    }
+    
+    func setEdits(textFields: [UITextField], textDescription: UITextView) {
+            
+        for item in textFields {
+            item.isEnabled = false
+        }
+            
+        textDescription.isEditable = false
+        
+        applyChangesBtn.isEnabled = false
+
+    }
+    
+    override func saveTask(name: String, percentCompletition: Int16, state: State, estimatedTime: Int32, startDate: Date, dueDate: Date, description: String?) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
         }
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.persistentContainer.viewContext
         
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Task")
+        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
+        
+//        let task = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        
+        tasks[(indexPath?.row)!].setValue(count, forKey: "id")
+        tasks[(indexPath?.row)!].setValue(name, forKey: "name")
+        tasks[(indexPath?.row)!].setValue(percentCompletition, forKey: "percentCompletition")
+        tasks[(indexPath?.row)!].setValue(state.rawValue, forKey: "state")
+        tasks[(indexPath?.row)!].setValue(estimatedTime, forKey: "estimatedTime")
+        tasks[(indexPath?.row)!].setValue(startDate, forKey: "startDate")
+        tasks[(indexPath?.row)!].setValue(dueDate, forKey: "endDate")
+        tasks[(indexPath?.row)!].setValue(description, forKey: "taskDescription")
         
         do {
-            tasks = try managedContext.fetch(fetchRequest)
-            print("fetch succeeded")
+            try managedContext.save()
+            count += 1
+            print("edit succeeded, \(tasks.count)")
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            print("could not save, \(error), \(error.userInfo)")
         }
-        
     }
-
 
 }
 

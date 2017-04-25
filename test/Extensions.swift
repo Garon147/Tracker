@@ -17,3 +17,12 @@ extension UITextField {
         self.layer.borderColor = UIColor.black.cgColor
     }
 }
+
+extension DateFormatter {
+    
+    func setPrefernces() {
+        
+        self.dateStyle = .short
+        self.timeStyle = .none
+    }
+}

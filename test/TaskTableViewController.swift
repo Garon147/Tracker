@@ -36,7 +36,7 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchData()
+        fetchData(taskTable: taskTable)
     }
     
 
@@ -87,28 +87,6 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
             let indexPath = self.taskTable.indexPathForSelectedRow {
             
             nextScene.indexPath = indexPath
-        }
-    }
-    
-    override func fetchData() {
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Task")
-        
-        do {
-            tasks = try managedContext.fetch(fetchRequest)
-            taskTable.reloadData()
-            print("fetch succeeded")
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
     

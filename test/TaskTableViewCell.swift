@@ -15,8 +15,7 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var datesLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var showTaskButton: UIButton!
-    @IBOutlet weak var editTaskButton: UIButton!
+
     
     
     
