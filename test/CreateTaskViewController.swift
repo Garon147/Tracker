@@ -46,6 +46,7 @@ class CreateTaskViewController: BaseViewController {
         } else {
         
             saveTask(name: nameTextField.text!, percentCompletition: 0, state: .New, estimatedTime: Double(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionTextField.text)
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -53,7 +54,13 @@ class CreateTaskViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textFieldsStyles()
+        var textFields = [UITextField]()
+        textFields.append(nameTextField)
+        textFields.append(timeTextField)
+        textFields.append(startDateTextField)
+        textFields.append(endDateTextField)
+        
+        textFieldsStyles(textFieldArray: textFields, taskDescription: taskDescriptionTextField)
         createStartDatePicker()
         createEndDatePicker()
         
@@ -66,53 +73,9 @@ class CreateTaskViewController: BaseViewController {
     }
     
     
-    func textFieldsStyles() {
-        
-        taskDescriptionTextField.layer.borderWidth = 1
-        taskDescriptionTextField.layer.borderColor = UIColor.black.cgColor
-        
-        var textFields = [UITextField]()
-        textFields.append(nameTextField)
-        textFields.append(timeTextField)
-        textFields.append(startDateTextField)
-        textFields.append(endDateTextField)
-        
-        for item in textFields{
-            item.setBorderStyle()
-        }
-        
-    }
+
     
-    func saveTask(name: String, percentCompletition: Int16, state: State, estimatedTime: Double, startDate: Date,
-                  dueDate: Date, description: String?) {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
-        
-        let task = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        task.setValue(name, forKey: "name")
-        task.setValue(percentCompletition, forKey: "percentCompletition")
-        task.setValue(state.rawValue, forKey: "state")
-        task.setValue(estimatedTime, forKey: "estimatedTime")
-        task.setValue(startDate, forKey: "startDate")
-        task.setValue(dueDate, forKey: "endDate")
-        task.setValue(description, forKey: "taskDescription")
-        
-        do {
-            try managedContext.save()
-            tasks.append(task)
-            print("save succeeded, \(tasks.count)")
-        } catch let error as NSError {
-            print("could not save, \(error), \(error.userInfo)")
-        }
-        
-    }
+
     
     func createStartDatePicker() {
         
@@ -123,9 +86,10 @@ class CreateTaskViewController: BaseViewController {
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneStartPressed))
         toolbar.setItems([doneButton], animated: true)
-        
+
         startDateTextField.inputAccessoryView = toolbar
         startDateTextField.inputView = startDatePicker
+        
     }
     
     func doneStartPressed(){
@@ -165,62 +129,9 @@ class CreateTaskViewController: BaseViewController {
     }
     
     
-    
-    
-//    @nonobjc func checkDateText(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
-//                       replacementString string: String)->Bool {
-//        
-//        if (textField.tag == 1 || textField.tag == 2) {
-//            
-//            let numbersOnly = NSCharacterSet(charactersIn: "123456789-")
-//            let characterSetFromTextField = NSCharacterSet(charactersIn: string)
-//            
-//            let Validate:Bool = numbersOnly .isSuperset(of: characterSetFromTextField as CharacterSet)
-//            if (!Validate) {
-//                return false;
-//            }
-//            if (range.length + range.location > (textField.text?.characters.count)!) {
-//                return false
-//            }
-//            let newLength = (textField.text?.characters.count)! + string.characters.count - range.length
-//            if newLength == 3 || newLength == 6 {
-//                let  char = string.cString(using: String.Encoding.utf8)!
-//                let isBackSpace = strcmp(char, "\\b")
-//                
-//                if (isBackSpace == -92) {
-//                    dateFormate = false;
-//                }else{
-//                    dateFormate = true;
-//                }
-//                
-//                if dateFormate {
-//                    let textContent:String!
-//                    textContent = textField.text
-//                    //3.Here we add '-' on overself.
-//                    let textWithHifen:NSString = "\(textContent)-" as NSString
-//                    textField.text = textWithHifen as String
-//                    dateFormate = false
-//                }
-//            }
-//            //4. this one helps to make sure only 8 character is added in textfield .(ie: dd-mm-yy)
-//            return newLength <= 10;
-//            
-//        }
-//        return true
-//    }
-    
         
 }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 

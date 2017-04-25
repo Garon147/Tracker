@@ -31,38 +31,14 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
         taskTable.delegate = self
         
         taskTable.tableFooterView = UIView()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Task")
-        
-        do {
-            tasks = try managedContext.fetch(fetchRequest)
-            taskTable.reloadData()
-            print("fetch succeeded")
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-
+        fetchData()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -100,10 +76,42 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-
-
     
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: SHOW_TASK_ID, sender: tasks[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SHOW_TASK_ID,
+           let nextScene = segue.destination as? ShowTaskViewController,
+            let indexPath = self.taskTable.indexPathForSelectedRow {
+            
+            nextScene.indexPath = indexPath
+        }
+    }
+    
+    override func fetchData() {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Task")
+        
+        do {
+            tasks = try managedContext.fetch(fetchRequest)
+            taskTable.reloadData()
+            print("fetch succeeded")
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
 
 }
 

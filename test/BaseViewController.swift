@@ -11,7 +11,14 @@ import CoreData
 
 class BaseViewController: UIViewController {
     
-    var tasks = [NSManagedObject]();
+    let CREATE_TASK_ID = "CreateTask"
+    let SHOW_TASK_ID = "ShowTask"
+    let EDIT_TASK_ID = "EditTask"
+    
+    public var tasks = [NSManagedObject]();
+    var count: Int16 = 0
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +29,55 @@ class BaseViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func saveTask(name: String, percentCompletition: Int16, state: State, estimatedTime: Double, startDate: Date,
+                  dueDate: Date, description: String?) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
+        
+        let task = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        
+        task.setValue(count, forKey: "id")
+        task.setValue(name, forKey: "name")
+        task.setValue(percentCompletition, forKey: "percentCompletition")
+        task.setValue(state.rawValue, forKey: "state")
+        task.setValue(estimatedTime, forKey: "estimatedTime")
+        task.setValue(startDate, forKey: "startDate")
+        task.setValue(dueDate, forKey: "endDate")
+        task.setValue(description, forKey: "taskDescription")
+        
+        do {
+            try managedContext.save()
+            tasks.append(task)
+            count += 1
+            print("save succeeded, \(tasks.count)")
+        } catch let error as NSError {
+            print("could not save, \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    func textFieldsStyles(textFieldArray: [UITextField], taskDescription: UITextView) {
+        
+        taskDescription.layer.borderWidth = 1
+        taskDescription.layer.borderColor = UIColor.black.cgColor
+    
+        for item in textFieldArray{
+            item.setBorderStyle()
+        }
+        
+    }
+    
+    func fetchData() {
+        
     }
     
 
