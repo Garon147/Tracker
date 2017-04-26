@@ -9,13 +9,15 @@
 import UIKit
 import CoreData
 
-class ShowTaskViewController: BaseViewController {
+class ShowTaskViewController: BaseViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     var indexPath: IndexPath? = nil
     var textFields = [UITextField]()
     var oldProgress: Int16 = 0
     var newProgress: Int16 = 0
+    let picker = UIPickerView()
+    let pickerStateArray = [State.New.rawValue, State.InProgress.rawValue, State.Done.rawValue]
     
     //MARK: Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -49,7 +51,7 @@ class ShowTaskViewController: BaseViewController {
                 if(checkProgress()){
                     
                     if(checkProgressValue()) {
-                        saveTask(name: nameTextField.text!, percentCompletition: newProgress, state: .InProgress, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionText.text)
+                        saveTask(name: nameTextField.text!, percentCompletition: newProgress, state: State(rawValue: statusTextField.text!)!, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionText.text)
                         
                         switchButton.isOn = false
                         navigationController?.popViewController(animated: true)
@@ -89,6 +91,9 @@ class ShowTaskViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        picker.delegate = self
+        picker.dataSource = self
+        statusTextField.inputView = picker
         
         textFields.append(nameTextField)
         textFields.append(progressTextField)
@@ -105,12 +110,6 @@ class ShowTaskViewController: BaseViewController {
         setText(task: task as! Task)
         createStartDatePicker()
         createEndDatePicker()
-        
-        
-        
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -244,6 +243,23 @@ class ShowTaskViewController: BaseViewController {
         } else {
             return false
         }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerStateArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerStateArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        statusTextField.text = pickerStateArray[row]
+        self.view.endEditing(false)
     }
 
 }
