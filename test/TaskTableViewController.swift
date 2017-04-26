@@ -17,9 +17,9 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
     
     
     //MARK: Actions
-    @IBAction func newTaskButton(_ sender: UIButton) {
+    @IBAction func createNewTaskButton(_ sender: UIBarButtonItem) {
         
-        performSegue(withIdentifier: "CreateTask", sender: self)
+        performSegue(withIdentifier: CREATE_TASK_ID, sender: self)
     }
     
     override func viewDidLoad() {

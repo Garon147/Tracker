@@ -401,26 +401,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdX-Al-NnY">
-                                <rect key="frame" x="116" y="74" width="143" height="30"/>
-                                <state key="normal" title="Create new task"/>
-                                <connections>
-                                    <action selector="newTaskButton:" destination="eru-mb-vJx" eventType="touchUpInside" id="Icl-XZ-wDD"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NDL-N4-YX1">
-                                <rect key="frame" x="16" y="114" width="343" height="553"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="90" id="xub-Ly-DeQ" customClass="TaskTableViewCell" customModule="test" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="90" id="xub-Ly-DeQ" customClass="TaskTableViewCell" customModule="test" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xub-Ly-DeQ" id="trF-NT-HJy">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPi-ty-N8F">
-                                                    <rect key="frame" x="8" y="8" width="45" height="21"/>
+                                                    <rect key="frame" x="8" y="8" width="294" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -432,7 +425,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ay-5W-1mJ">
-                                                    <rect key="frame" x="8" y="61" width="79" height="18"/>
+                                                    <rect key="frame" x="8" y="61" width="302" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -440,10 +433,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="TAz-Nn-02C" firstAttribute="top" secondItem="KPi-ty-N8F" secondAttribute="bottom" constant="6" id="Cjo-YV-Qq6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="KPi-ty-N8F" secondAttribute="trailing" id="Ppi-KF-nvX"/>
                                                 <constraint firstItem="5Ay-5W-1mJ" firstAttribute="top" secondItem="TAz-Nn-02C" secondAttribute="bottom" constant="8" id="UE7-Qe-EK0"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="5Ay-5W-1mJ" secondAttribute="bottom" constant="3" id="UFs-Ez-tsE"/>
                                                 <constraint firstItem="KPi-ty-N8F" firstAttribute="leading" secondItem="trF-NT-HJy" secondAttribute="leadingMargin" id="dUq-w7-lfq"/>
                                                 <constraint firstItem="TAz-Nn-02C" firstAttribute="top" secondItem="KPi-ty-N8F" secondAttribute="bottom" constant="6" id="eui-tV-Ez6"/>
+                                                <constraint firstAttribute="trailing" secondItem="5Ay-5W-1mJ" secondAttribute="trailing" id="fV2-W1-Fcl"/>
                                                 <constraint firstItem="5Ay-5W-1mJ" firstAttribute="top" secondItem="TAz-Nn-02C" secondAttribute="bottom" constant="8" id="gwW-pY-FYC"/>
                                                 <constraint firstItem="KPi-ty-N8F" firstAttribute="top" secondItem="trF-NT-HJy" secondAttribute="topMargin" id="u5v-wO-1fr"/>
                                                 <constraint firstItem="TAz-Nn-02C" firstAttribute="leading" secondItem="trF-NT-HJy" secondAttribute="leadingMargin" id="vtj-TU-xtZ"/>
@@ -461,17 +456,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NDL-N4-YX1" firstAttribute="leading" secondItem="pBo-4s-Xbu" secondAttribute="leadingMargin" id="6tw-5i-ppS"/>
-                            <constraint firstItem="NDL-N4-YX1" firstAttribute="trailing" secondItem="pBo-4s-Xbu" secondAttribute="trailingMargin" id="dGa-yV-82N"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="SdX-Al-NnY" secondAttribute="trailing" constant="100" id="gBM-fP-E58"/>
-                            <constraint firstItem="NDL-N4-YX1" firstAttribute="top" secondItem="SdX-Al-NnY" secondAttribute="bottom" constant="10" id="jWS-cM-fgG"/>
-                            <constraint firstItem="SdX-Al-NnY" firstAttribute="leading" secondItem="pBo-4s-Xbu" secondAttribute="leadingMargin" constant="100" id="rXm-EI-Oow"/>
-                            <constraint firstItem="SdX-Al-NnY" firstAttribute="top" secondItem="PKJ-wB-DZ0" secondAttribute="bottom" constant="10" id="v89-0s-HCq"/>
-                            <constraint firstItem="t0w-7M-o5B" firstAttribute="top" secondItem="NDL-N4-YX1" secondAttribute="bottom" id="zVp-Pl-h5i"/>
+                            <constraint firstItem="NDL-N4-YX1" firstAttribute="leading" secondItem="pBo-4s-Xbu" secondAttribute="leadingMargin" id="5ah-8y-l7v"/>
+                            <constraint firstItem="t0w-7M-o5B" firstAttribute="top" secondItem="NDL-N4-YX1" secondAttribute="bottom" id="Zf1-mH-Qfw"/>
+                            <constraint firstItem="NDL-N4-YX1" firstAttribute="trailing" secondItem="pBo-4s-Xbu" secondAttribute="trailingMargin" id="ZrX-hp-c5s"/>
+                            <constraint firstItem="NDL-N4-YX1" firstAttribute="top" secondItem="pBo-4s-Xbu" secondAttribute="topMargin" id="rg9-gx-9VH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Task manager" id="Yut-wH-OLx">
                         <barButtonItem key="backBarButtonItem" title="back" id="UZD-jQ-qC1"/>
+                        <barButtonItem key="rightBarButtonItem" title="New task" id="N7X-8R-5ij">
+                            <connections>
+                                <action selector="createNewTaskButton:" destination="eru-mb-vJx" id="Ljf-aC-y78"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="taskTable" destination="NDL-N4-YX1" id="qXi-H3-gRt"/>
