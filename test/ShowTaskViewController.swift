@@ -32,15 +32,30 @@ class ShowTaskViewController: BaseViewController {
     //MARK: Actions
     @IBAction func applyChangesButton(_ sender: UIButton) {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
         
-        saveTask(name: nameTextField.text!, percentCompletition: 5, state: .InProgress, estimatedTime: 10, startDate: dateFormatter.date(from: startDateTextField.text!)!, dueDate: dateFormatter.date(from: endDateTextField.text!)!, description: taskDescriptionText.text)
+        if ((nameTextField.text?.isEmpty)! || (progressTextField.text?.isEmpty)! || (timeTextField.text?.isEmpty)! ) {
+            
+            let alertTitle = "Error"
+            let alertMessage = "All fields except description must be filled!"
+            
+            let alert = UIAlertController(title: alertTitle, message: alertMessage,
+                                          preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            
+            
+            alert.addAction(okAction)
+            present(alert, animated: true)
+            
+            
+
+        } else {
+            
+            saveTask(name: nameTextField.text!, percentCompletition: Int16(progressTextField.text!)!, state: .InProgress, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionText.text)
+            
+            switchButton.isOn = false
+            navigationController?.popViewController(animated: true)
+        }
         
-        switchButton.isOn = false
-        
-        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func editSwitchButton(_ sender: UISwitch) {
@@ -81,6 +96,8 @@ class ShowTaskViewController: BaseViewController {
         fetchData(taskTable: nil)
         let task = tasks[(indexPath?.row)!]
         setText(task: task as! Task)
+        createStartDatePicker()
+        createEndDatePicker()
         
         
         
@@ -108,9 +125,9 @@ class ShowTaskViewController: BaseViewController {
         progressView.setProgress(progress as! Float, animated: true)
         
         nameTextField.text = task.value(forKey: "name") as? String
-        progressTextField.text = String(describing: progress!) + " %"
+        progressTextField.text = String(describing: progress!)
         statusTextField.text = task.value(forKey: "state") as? String
-        timeTextField.text = String(describing: task.value(forKey: "estimatedTime")!) + " hours"
+        timeTextField.text = String(describing: task.value(forKey: "estimatedTime")!)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -141,11 +158,6 @@ class ShowTaskViewController: BaseViewController {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
-        
-//        let task = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        
         tasks[(indexPath?.row)!].setValue(count, forKey: "id")
         tasks[(indexPath?.row)!].setValue(name, forKey: "name")
         tasks[(indexPath?.row)!].setValue(percentCompletition, forKey: "percentCompletition")
@@ -157,11 +169,57 @@ class ShowTaskViewController: BaseViewController {
         
         do {
             try managedContext.save()
-            count += 1
             print("edit succeeded, \(tasks.count)")
         } catch let error as NSError {
             print("could not save, \(error), \(error.userInfo)")
         }
+    }
+    
+    func createStartDatePicker() {
+        
+        startDatePicker.datePickerMode = .date
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneStartPressed))
+        toolbar.setItems([doneButton], animated: true)
+        
+        startDateTextField.inputAccessoryView = toolbar
+        startDateTextField.inputView = startDatePicker
+        
+    }
+    
+    func doneStartPressed(){
+        
+        dateFormatter.setPreferences()
+        
+        startDateTextField.text = dateFormatter.string(from: startDatePicker.date)
+        startDate = startDatePicker.date
+        self.view.endEditing(true)
+    }
+    
+    func createEndDatePicker() {
+        
+        endDatePicker.datePickerMode = .date
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneEndPressed))
+        toolbar.setItems([doneButton], animated: true)
+        
+        endDateTextField.inputAccessoryView = toolbar
+        endDateTextField.inputView = endDatePicker
+    }
+    
+    func doneEndPressed(){
+        
+        dateFormatter.setPreferences()
+        
+        endDateTextField.text = dateFormatter.string(from: endDatePicker.date)
+        endDate = endDatePicker.date
+        self.view.endEditing(true)
     }
 
 }

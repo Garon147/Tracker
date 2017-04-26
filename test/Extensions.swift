@@ -20,7 +20,7 @@ extension UITextField {
 
 extension DateFormatter {
     
-    func setPrefernces() {
+    func setPreferences() {
         
         self.dateStyle = .short
         self.timeStyle = .none

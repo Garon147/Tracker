@@ -13,10 +13,14 @@ class BaseViewController: UIViewController {
     
     let CREATE_TASK_ID = "CreateTask"
     let SHOW_TASK_ID = "ShowTask"
-    let EDIT_TASK_ID = "EditTask"
     
     public var tasks = [NSManagedObject]();
     var count: Int16 = 0
+    let dateFormatter = DateFormatter()
+    let startDatePicker = UIDatePicker()
+    let endDatePicker = UIDatePicker()
+    var startDate = Date()
+    var endDate = Date()
     
     
 
@@ -102,7 +106,15 @@ class BaseViewController: UIViewController {
 
     }
     
-
+    func dateComparator() -> Bool {
+        
+        if(startDate < endDate || startDate == endDate) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

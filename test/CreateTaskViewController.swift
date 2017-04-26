@@ -11,12 +11,6 @@ import CoreData
 
 class CreateTaskViewController: BaseViewController {
     
-
-    //MARK: Properties
-    let startDatePicker = UIDatePicker()
-    let endDatePicker = UIDatePicker()
-    var startDate = Date()
-    var endDate = Date()
     
     //MARK: Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -31,22 +25,32 @@ class CreateTaskViewController: BaseViewController {
     @IBAction func createTaskButton(_ sender: UIButton) {
         
         let alertTitle = "Error"
-        let alertMessage = "All field except description must be filled!"
+        let alertMessage = "All fields except description must be filled!"
+        let dateAlertMessage = "Start date must be less than end date"
+        let okAction = UIAlertAction(title: "OK", style: .default)
         
         if((nameTextField.text?.isEmpty)! || (timeTextField.text?.isEmpty)! || (startDateTextField.text?.isEmpty)! || (endDateTextField.text?.isEmpty)!){
             
             let alert = UIAlertController(title: alertTitle, message: alertMessage,
                                           preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            
             
             alert.addAction(okAction)
             present(alert, animated: true)
             
         } else {
-        
-            saveTask(name: nameTextField.text!, percentCompletition: 0, state: .New, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionTextField.text)
-            navigationController?.popViewController(animated: true)
+            
+            if(dateComparator()) {
+                
+                saveTask(name: nameTextField.text!, percentCompletition: 0, state: .New, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionTextField.text)
+                navigationController?.popViewController(animated: true)
+            } else {
+                
+                let alert = UIAlertController(title: alertTitle, message: dateAlertMessage, preferredStyle: .alert)
+                
+                alert.addAction(okAction)
+                present(alert, animated: true)
+            }        
+            
         }
     }
     
@@ -72,11 +76,6 @@ class CreateTaskViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-
-    
-
-    
     func createStartDatePicker() {
         
         startDatePicker.datePickerMode = .date
@@ -94,9 +93,7 @@ class CreateTaskViewController: BaseViewController {
     
     func doneStartPressed(){
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
+        dateFormatter.setPreferences()
         
         startDateTextField.text = dateFormatter.string(from: startDatePicker.date)
         startDate = startDatePicker.date
@@ -119,9 +116,7 @@ class CreateTaskViewController: BaseViewController {
     
     func doneEndPressed(){
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
+        dateFormatter.setPreferences()
         
         endDateTextField.text = dateFormatter.string(from: endDatePicker.date)
         endDate = endDatePicker.date
