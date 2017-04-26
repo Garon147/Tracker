@@ -14,6 +14,11 @@ class BaseViewController: UIViewController {
     let CREATE_TASK_ID = "CreateTask"
     let SHOW_TASK_ID = "ShowTask"
     
+    let EMPTY_CHECK = "emptyCheck"
+    let DATE_CHECK = "dateCheck"
+    let PROGRESS_CHECK = "progressCheck"
+    let PROGRESS_VALUE_CHECK = "progressValueCheck"
+    
     public var tasks = [NSManagedObject]();
     var count: Int16 = 0
     let dateFormatter = DateFormatter()
@@ -21,6 +26,13 @@ class BaseViewController: UIViewController {
     let endDatePicker = UIDatePicker()
     var startDate = Date()
     var endDate = Date()
+    
+    let alertTitle = "Error"
+    let alertMessage = "All fields except description must be filled!"
+    let dateAlertMessage = "Start date must be less than end date"
+    let progressAlertMessage = "New progress value must be bigger than previous"
+    let progressValueMessage = "Progress value can't be bigger than 100"
+    let okAction = UIAlertAction(title: "OK", style: .default)
     
     
 
@@ -113,6 +125,33 @@ class BaseViewController: UIViewController {
         } else {
             return false
         }
+    }
+    
+    func createAlert(status: String) {
+        
+        var alert = UIAlertController()
+        
+        switch status {
+        case EMPTY_CHECK:
+            alert = UIAlertController(title: alertTitle, message: alertMessage,
+                                      preferredStyle: .alert)
+            break
+        case DATE_CHECK:
+            alert = UIAlertController(title: alertTitle, message: dateAlertMessage,
+                                      preferredStyle: .alert)
+            break
+        case PROGRESS_CHECK:
+            alert = UIAlertController(title: alertTitle, message: progressAlertMessage, preferredStyle: .alert)
+            break
+        case PROGRESS_VALUE_CHECK:
+            alert = UIAlertController(title: alertTitle, message: progressValueMessage, preferredStyle: .alert)
+            break
+        default:
+            break
+        }
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
     
     /*

@@ -14,6 +14,8 @@ class ShowTaskViewController: BaseViewController {
     
     var indexPath: IndexPath? = nil
     var textFields = [UITextField]()
+    var oldProgress: Int16 = 0
+    var newProgress: Int16 = 0
     
     //MARK: Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -35,27 +37,32 @@ class ShowTaskViewController: BaseViewController {
         
         if ((nameTextField.text?.isEmpty)! || (progressTextField.text?.isEmpty)! || (timeTextField.text?.isEmpty)! ) {
             
-            let alertTitle = "Error"
-            let alertMessage = "All fields except description must be filled!"
-            
-            let alert = UIAlertController(title: alertTitle, message: alertMessage,
-                                          preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            
-            
-            alert.addAction(okAction)
-            present(alert, animated: true)
-            
+            createAlert(status: EMPTY_CHECK)
             
 
         } else {
             
-            saveTask(name: nameTextField.text!, percentCompletition: Int16(progressTextField.text!)!, state: .InProgress, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionText.text)
+            newProgress = Int16(progressTextField.text!)!
             
-            switchButton.isOn = false
-            navigationController?.popViewController(animated: true)
+            if(dateComparator()){
+                
+                if(checkProgress()){
+                    
+                    if(checkProgressValue()) {
+                        saveTask(name: nameTextField.text!, percentCompletition: newProgress, state: .InProgress, estimatedTime: Int32(timeTextField.text!)!, startDate: startDate, dueDate: endDate, description: taskDescriptionText.text)
+                        
+                        switchButton.isOn = false
+                        navigationController?.popViewController(animated: true)
+                    } else {
+                        createAlert(status: PROGRESS_VALUE_CHECK)
+                    }
+                } else {
+                    createAlert(status: PROGRESS_CHECK)
+                }
+            } else {
+                createAlert(status: DATE_CHECK)
+            }
         }
-        
     }
     
     @IBAction func editSwitchButton(_ sender: UISwitch) {
@@ -120,12 +127,14 @@ class ShowTaskViewController: BaseViewController {
     
     func setText(task: Task) {
         
-        let progress = task.value(forKey: "percentCompletition")
+        let progress = Int16(task.value(forKey: "percentCompletition") as! Int16)
+        oldProgress = progress
+        let progressPercent = Float(progress)/100
         
-        progressView.setProgress(progress as! Float, animated: true)
+        progressView.setProgress(progressPercent , animated: true)
         
         nameTextField.text = task.value(forKey: "name") as? String
-        progressTextField.text = String(describing: progress!)
+        progressTextField.text = String(describing: progress)
         statusTextField.text = task.value(forKey: "state") as? String
         timeTextField.text = String(describing: task.value(forKey: "estimatedTime")!)
         
@@ -158,7 +167,6 @@ class ShowTaskViewController: BaseViewController {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        tasks[(indexPath?.row)!].setValue(count, forKey: "id")
         tasks[(indexPath?.row)!].setValue(name, forKey: "name")
         tasks[(indexPath?.row)!].setValue(percentCompletition, forKey: "percentCompletition")
         tasks[(indexPath?.row)!].setValue(state.rawValue, forKey: "state")
@@ -220,6 +228,22 @@ class ShowTaskViewController: BaseViewController {
         endDateTextField.text = dateFormatter.string(from: endDatePicker.date)
         endDate = endDatePicker.date
         self.view.endEditing(true)
+    }
+    
+    func checkProgress() -> Bool {
+        if(oldProgress < newProgress || oldProgress == newProgress) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func checkProgressValue() -> Bool {
+        if(newProgress < 100 || newProgress == 100) {
+            return true
+        } else {
+            return false
+        }
     }
 
 }

@@ -24,18 +24,11 @@ class CreateTaskViewController: BaseViewController {
     //MARK: Actions
     @IBAction func createTaskButton(_ sender: UIButton) {
         
-        let alertTitle = "Error"
-        let alertMessage = "All fields except description must be filled!"
-        let dateAlertMessage = "Start date must be less than end date"
-        let okAction = UIAlertAction(title: "OK", style: .default)
+        
         
         if((nameTextField.text?.isEmpty)! || (timeTextField.text?.isEmpty)! || (startDateTextField.text?.isEmpty)! || (endDateTextField.text?.isEmpty)!){
             
-            let alert = UIAlertController(title: alertTitle, message: alertMessage,
-                                          preferredStyle: .alert)
-            
-            alert.addAction(okAction)
-            present(alert, animated: true)
+            createAlert(status: EMPTY_CHECK)
             
         } else {
             
@@ -45,10 +38,7 @@ class CreateTaskViewController: BaseViewController {
                 navigationController?.popViewController(animated: true)
             } else {
                 
-                let alert = UIAlertController(title: alertTitle, message: dateAlertMessage, preferredStyle: .alert)
-                
-                alert.addAction(okAction)
-                present(alert, animated: true)
+                createAlert(status: DATE_CHECK)
             }        
             
         }
