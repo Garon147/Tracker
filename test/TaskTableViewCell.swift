@@ -16,14 +16,6 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var datesLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
-    
-    
-    
-    //MARK: Actions
-
-    
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         

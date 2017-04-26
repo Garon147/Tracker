@@ -11,14 +11,12 @@ import CoreData
 
 class TaskViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
-    //MARK: Properties
-    
+    //MARK: Outlets
     @IBOutlet weak var taskTable: UITableView!
     
     
     
     //MARK: Actions
-
     @IBAction func newTaskButton(_ sender: UIButton) {
         
         performSegue(withIdentifier: "CreateTask", sender: self)
@@ -37,12 +35,6 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
         super.viewWillAppear(animated)
         
         fetchData(taskTable: taskTable)
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -82,6 +74,7 @@ class TaskViewController: BaseViewController, UITableViewDataSource, UITableView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == SHOW_TASK_ID,
            let nextScene = segue.destination as? ShowTaskViewController,
             let indexPath = self.taskTable.indexPathForSelectedRow {

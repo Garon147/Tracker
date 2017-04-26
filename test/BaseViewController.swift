@@ -11,6 +11,7 @@ import CoreData
 
 class BaseViewController: UIViewController {
     
+    //MARK: Properties
     let CREATE_TASK_ID = "CreateTask"
     let SHOW_TASK_ID = "ShowTask"
     
@@ -47,6 +48,7 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: database methods
     func saveTask(name: String, percentCompletition: Int16, state: State, estimatedTime: Int32, startDate: Date,
                   dueDate: Date, description: String?) {
         
@@ -81,17 +83,6 @@ class BaseViewController: UIViewController {
         
     }
     
-    func textFieldsStyles(textFieldArray: [UITextField], taskDescription: UITextView) {
-        
-        taskDescription.layer.borderWidth = 1
-        taskDescription.layer.borderColor = UIColor.black.cgColor
-    
-        for item in textFieldArray{
-            item.setBorderStyle()
-        }
-        
-    }
-    
     func fetchData(taskTable: UITableView?) {
         
         guard let appDelegate =
@@ -118,6 +109,19 @@ class BaseViewController: UIViewController {
 
     }
     
+    //MARK: setting UI
+    func textFieldsStyles(textFieldArray: [UITextField], taskDescription: UITextView) {
+        
+        taskDescription.layer.borderWidth = 1
+        taskDescription.layer.borderColor = UIColor.black.cgColor
+        
+        for item in textFieldArray{
+            item.setBorderStyle()
+        }
+        
+    }
+    
+    //MARK: text checkers
     func dateComparator() -> Bool {
         
         if(startDate < endDate || startDate == endDate) {
@@ -153,15 +157,5 @@ class BaseViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

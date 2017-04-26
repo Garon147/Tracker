@@ -176,6 +176,7 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDU-PF-AY8">
                                 <rect key="frame" x="136" y="570" width="102" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Apply changes"/>
                                 <connections>
                                     <action selector="applyChangesButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pej-Fx-6Cs"/>
@@ -244,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1040.8" y="-628.33583208395805"/>
+            <point key="canvasLocation" x="1297" y="-254"/>
         </scene>
         <!--Create Task View Controller-->
         <scene sceneID="74O-IG-oK5">
@@ -318,7 +319,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="71r-34-Ll9">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="71r-34-Ll9">
                                 <rect key="frame" x="16" y="421" width="343" height="73"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -329,7 +330,7 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PD3-lm-ox2">
                                 <rect key="frame" x="148" y="514" width="79" height="30"/>
-                                <color key="backgroundColor" red="0.99423299786574371" green="1" blue="0.25123432410758206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Create task"/>
                                 <connections>
                                     <action selector="createTaskButton:" destination="DWk-7X-8n3" eventType="touchUpInside" id="F02-9b-JKi"/>
@@ -376,6 +377,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="createTask" destination="PD3-lm-ox2" id="KGH-ww-qtk"/>
                         <outlet property="endDateTextField" destination="6w3-ao-gUC" id="BXs-Y2-CjU"/>
                         <outlet property="nameTextField" destination="p0Q-Md-sjW" id="MwT-23-Ukg"/>
                         <outlet property="startDateTextField" destination="pWL-mF-fKh" id="Et5-1f-CaW"/>
@@ -385,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vEl-Mj-h6d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928.79999999999995" y="784.85757121439292"/>
+            <point key="canvasLocation" x="1297" y="483"/>
         </scene>
         <!--Task manager-->
         <scene sceneID="oYj-S2-P7v">
@@ -474,31 +476,12 @@
                     <connections>
                         <outlet property="taskTable" destination="NDL-N4-YX1" id="qXi-H3-gRt"/>
                         <segue destination="DWk-7X-8n3" kind="show" identifier="CreateTask" id="gyo-63-aft"/>
-                        <segue destination="oCS-Qw-WMq" kind="show" identifier="EditTask" id="V73-KZ-Hgc"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ShowTask" id="Y8x-8T-voc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XK5-NV-2PA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="68" y="11.244377811094454"/>
-        </scene>
-        <!--Change Task View Controller-->
-        <scene sceneID="lvi-mB-ksJ">
-            <objects>
-                <viewController id="oCS-Qw-WMq" customClass="ChangeTaskViewController" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gQu-ME-LqA"/>
-                        <viewControllerLayoutGuide type="bottom" id="zkq-Fg-3BP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="imx-DU-g9J" customClass="ChangeViewController">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FSc-aG-zlj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1304.8" y="41.829085457271368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zNn-D0-gf7">

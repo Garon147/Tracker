@@ -18,13 +18,12 @@ class CreateTaskViewController: BaseViewController {
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
     @IBOutlet weak var taskDescriptionTextField: UITextView!
+    @IBOutlet weak var createTask: UIButton!
 
     
     
     //MARK: Actions
     @IBAction func createTaskButton(_ sender: UIButton) {
-        
-        
         
         if((nameTextField.text?.isEmpty)! || (timeTextField.text?.isEmpty)! || (startDateTextField.text?.isEmpty)! || (endDateTextField.text?.isEmpty)!){
             
@@ -39,8 +38,7 @@ class CreateTaskViewController: BaseViewController {
             } else {
                 
                 createAlert(status: DATE_CHECK)
-            }        
-            
+            }
         }
     }
     
@@ -58,14 +56,10 @@ class CreateTaskViewController: BaseViewController {
         createStartDatePicker()
         createEndDatePicker()
         
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        createTask.setPreferences()
     }
     
+    //MARK: DatePickers
     func createStartDatePicker() {
         
         startDatePicker.datePickerMode = .date
@@ -78,7 +72,6 @@ class CreateTaskViewController: BaseViewController {
 
         startDateTextField.inputAccessoryView = toolbar
         startDateTextField.inputView = startDatePicker
-        
     }
     
     func doneStartPressed(){
@@ -112,9 +105,7 @@ class CreateTaskViewController: BaseViewController {
         endDate = endDatePicker.date
         self.view.endEditing(true)
     }
-    
-    
-        
+
 }
     
 

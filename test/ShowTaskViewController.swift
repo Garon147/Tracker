@@ -11,7 +11,7 @@ import CoreData
 
 class ShowTaskViewController: BaseViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
+    //MARK: Properties
     var indexPath: IndexPath? = nil
     var textFields = [UITextField]()
     var oldProgress: Int16 = 0
@@ -110,20 +110,10 @@ class ShowTaskViewController: BaseViewController, UIPickerViewDelegate, UIPicker
         setText(task: task as! Task)
         createStartDatePicker()
         createEndDatePicker()
+        applyChangesBtn.setPreferences()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    //MARK: setting UI
     func setText(task: Task) {
         
         let progress = Int16(task.value(forKey: "percentCompletition") as! Int16)
@@ -158,6 +148,7 @@ class ShowTaskViewController: BaseViewController, UIPickerViewDelegate, UIPicker
 
     }
     
+    //MARK: database methods
     override func saveTask(name: String, percentCompletition: Int16, state: State, estimatedTime: Int32, startDate: Date, dueDate: Date, description: String?) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -182,6 +173,7 @@ class ShowTaskViewController: BaseViewController, UIPickerViewDelegate, UIPicker
         }
     }
     
+    //MARK: Date Pickers
     func createStartDatePicker() {
         
         startDatePicker.datePickerMode = .date
@@ -245,6 +237,7 @@ class ShowTaskViewController: BaseViewController, UIPickerViewDelegate, UIPicker
         }
     }
     
+    //MARK: StatePicker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

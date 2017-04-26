@@ -17,10 +17,8 @@
 		848431E41EA9E70500501150 /* testUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431E31EA9E70500501150 /* testUITests.swift */; };
 		848431F21EAA076100501150 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F11EAA076100501150 /* TaskTableViewCell.swift */; };
 		848431F41EAA1CFA00501150 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F31EAA1CFA00501150 /* TaskTableViewController.swift */; };
-		848431F61EAA1F9D00501150 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F51EAA1F9D00501150 /* Task.swift */; };
 		848431F81EAA203A00501150 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F71EAA203A00501150 /* State.swift */; };
 		848431FA1EAA28A800501150 /* CreateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431F91EAA28A800501150 /* CreateTaskViewController.swift */; };
-		848431FC1EAA28BA00501150 /* ChangeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */; };
 		848C065B1EABB42D005E9A6D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C065A1EABB42D005E9A6D /* Extensions.swift */; };
 		849875BB1EADF1A1000AFF67 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849875BA1EADF1A1000AFF67 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
@@ -59,10 +57,8 @@
 		848431E51EA9E70500501150 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848431F11EAA076100501150 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		848431F31EAA1CFA00501150 /* TaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
-		848431F51EAA1F9D00501150 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		848431F71EAA203A00501150 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		848431F91EAA28A800501150 /* CreateTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskViewController.swift; sourceTree = "<group>"; };
-		848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTaskViewController.swift; sourceTree = "<group>"; };
 		848C065A1EABB42D005E9A6D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		849875BA1EADF1A1000AFF67 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,11 +115,9 @@
 				849875BA1EADF1A1000AFF67 /* BaseViewController.swift */,
 				848C065A1EABB42D005E9A6D /* Extensions.swift */,
 				848431F91EAA28A800501150 /* CreateTaskViewController.swift */,
-				848431FB1EAA28BA00501150 /* ChangeTaskViewController.swift */,
 				848431F71EAA203A00501150 /* State.swift */,
 				848431F31EAA1CFA00501150 /* TaskTableViewController.swift */,
 				848431F11EAA076100501150 /* TaskTableViewCell.swift */,
-				848431F51EAA1F9D00501150 /* Task.swift */,
 				848431C21EA9E70500501150 /* ShowTaskViewController.swift */,
 				848431C41EA9E70500501150 /* Main.storyboard */,
 				848431CA1EA9E70500501150 /* Assets.xcassets */,
@@ -291,10 +285,8 @@
 				849875BB1EADF1A1000AFF67 /* BaseViewController.swift in Sources */,
 				848431C31EA9E70500501150 /* ShowTaskViewController.swift in Sources */,
 				848431C11EA9E70500501150 /* AppDelegate.swift in Sources */,
-				848431F61EAA1F9D00501150 /* Task.swift in Sources */,
 				848C065B1EABB42D005E9A6D /* Extensions.swift in Sources */,
 				848431F81EAA203A00501150 /* State.swift in Sources */,
-				848431FC1EAA28BA00501150 /* ChangeTaskViewController.swift in Sources */,
 				848431C91EA9E70500501150 /* test.xcdatamodeld in Sources */,
 				848431FA1EAA28A800501150 /* CreateTaskViewController.swift in Sources */,
 			);

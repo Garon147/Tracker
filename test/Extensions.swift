@@ -26,3 +26,12 @@ extension DateFormatter {
         self.timeStyle = .none
     }
 }
+
+extension UIButton {
+    
+    func setPreferences() {
+        
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.cgColor
+    }
+}
